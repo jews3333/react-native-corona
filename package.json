@@ -11,6 +11,7 @@
     "@expo/vector-icons": "^10.0.6",
     "@react-native-community/masked-view": "^0.1.7",
     "expo": "~36.0.0",
+    "mkcert": "^1.2.0",
     "native-base": "2.13.8",
     "react": "~16.9.0",
     "react-dom": "~16.9.0",
