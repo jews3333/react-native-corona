@@ -4,38 +4,37 @@ import { View, Text, StyleSheet } from 'react-native';
 export default class CoronaState extends Component {
 
     state = {
-
+        store: false
     }
 
     UNSAFE_componentWillMount(){
-        this.fetchCoronaState();
+        this.fetchCoronaState()
+        .then(stores => {
+            console.log(stores)
+            for(let i=0; i < stores.storeInfos.length; i++){
+                this.setState({
+                    ...this.state,
+                    i
+                })
+            }
+        })
+
     }
 
     fetchCoronaState = () => {
-        var myHeaders = new Headers();
-        myHeaders.append("APIKey", "27741b4d46a7a2657517342d05150e2ccbdf78d5174daabafc9ebcb9dbe45e59");
 
-        var requestOptions = {
-            method: 'GET',
-            headers: myHeaders,
-            redirect: 'follow'
-        };
-
-        fetch("https://api.dropper.tech/covid19/status/korea?locale=busan", requestOptions)
-        .then(res=> {
-            this.setState({
-                res
-            })
-        })
+        return fetch("https://8oi9s0nnth.apigw.ntruss.com/corona19-masks/v1/stores/json?page=1&perPage=5000")
+        .then(res=> res.json())
         .catch(error => console.log('error', error));
+
     }
 
     render(){
         return (
             <View style={style.container}>
                 {
-                    this.state.data ?
-                    <Text>{this.state.data}</Text>
+                    this.state.store ?
+                        <Text>{JSON.stringify(this.state)}</Text>
                     : null
                 }
             </View>
