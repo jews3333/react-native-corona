@@ -36,14 +36,14 @@ export default class MainScreen extends Component {
 
     render(){
         return (
-            <Container style={{flex:1, backgroundColor: '#fff'}}>
-                <Header style={{backgroundColor:"#fff"}}>
+            <Container style={{flex:1, backgroundColor: '#353646'}}>
+                <Header style={{backgroundColor:"#353646"}}>
                     <Left style={{flex:1}}>
-                        <Text>Back</Text>
+                        <Text style={{color:'#fff'}}>Back</Text>
                     </Left>
-                    <Body style={{flex:1, justifyContent:"center", alignItems:"center"}}><Title style={{color:"#333"}}>Corona</Title></Body>
+                    <Body style={{flex:1, justifyContent:"center", alignItems:"center"}}><Title style={{color:"#fedd04", fontWeight:"bold"}}>Corona19</Title></Body>
                     <Right style={{flex:1}}>
-                        <Text>Option</Text>
+                        <Text style={{color:'#fff'}}>Option</Text>
                     </Right>
                 </Header>
                 <AppTabContainer/>

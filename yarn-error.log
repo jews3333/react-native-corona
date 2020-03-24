@@ -1,20 +1,20 @@
 Arguments: 
-  C:\Program Files\nodejs\node.exe C:\Program Files (x86)\Yarn\bin\yarn.js add requset
+  C:\Program Files\nodejs\node.exe C:\Program Files\Yarn\bin\yarn.js add axios --network-timeout 10000000
 
 PATH: 
-  C:\Program Files (x86)\Common Files\Oracle\Java\javapath;C:\Program Files (x86)\NAT Service;C:\Windows\system32;C:\Windows;C:\Windows\System32\Wbem;C:\Windows\System32\WindowsPowerShell\v1.0\;C:\Windows\System32\OpenSSH\;C:\Program Files\nodejs\;C:\Program Files\Git\cmd;C:\Program Files (x86)\NVIDIA Corporation\PhysX\Common;C:\Program Files\NVIDIA Corporation\NVIDIA NvDLISR;C:\WINDOWS\system32;C:\WINDOWS;C:\WINDOWS\System32\Wbem;C:\WINDOWS\System32\WindowsPowerShell\v1.0\;C:\WINDOWS\System32\OpenSSH\;C:\Program Files (x86)\Yarn\bin\;C:\Users\jews3\AppData\Local\Microsoft\WindowsApps;C:\Users\jews3\AppData\Roaming\npm;C:\Users\jews3\AppData\Local\Yarn\bin
+  C:\Program Files\Java\jdk1.8.0_171\bin;C:\Windows\system32;C:\Windows;C:\Windows\System32\Wbem;C:\Windows\System32\WindowsPowerShell\v1.0\;C:\Program Files\Git\cmd;C:\Program Files\Yarn\bin;C:\Users\bu8886679\AppData\Roaming\npm;C:\Program Files\nodejs;C:\Users\bu8886679\project\react-native-corona\node_modules\.bin;C:\Users\bu8886679\AppData\Local\Yarn\bin;C:\Users\bu8886679\project\MyPortfolio\node_modules\.bin;C:\Users\bu8886679\AppData\Local\Programs\Microsoft VS Code\bin;
 
 Yarn version: 
-  1.22.4
+  1.17.3
 
 Node version: 
-  10.15.0
+  12.1.0
 
 Platform: 
-  win32 x64
+  win32 ia32
 
 Trace: 
-  Error: EPERM: operation not permitted, unlink 'E:\react-dev\react-native-corona\node_modules\@babel\plugin-transform-runtime\node_modules\.bin'
+  Error: EPERM: operation not permitted, unlink 'C:\Users\bu8886679\project\react-native-corona\node_modules\@babel\generator\node_modules\.bin'
 
 npm manifest: 
   {
