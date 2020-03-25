@@ -8,15 +8,27 @@ export default class CoronaState extends Component {
     }
 
     componentDidMount(){
-        // this.fetchCoronaState().then(status => {
-        //     this.setState({
-        //         status: status.data[0]
-        //     })
-        // })
+        this.getCoronaState().then(status => {
+            console.log(status.data[0]);
+            this.setState({
+                status: status.data[0]
+            })
+        })
 
     }
 
-    fetchCoronaState = () => {
+    getTimestemp = () => {
+        const time = new Date(this.state.status.announced_timestamp * 1000);
+        const yyyy = time.getFullYear();
+        const mm = time.getMonth() + 1;
+        const dd = time.getDate();
+        const hh = time.getHours();
+        const ms = time.getMinutes();
+
+        return String(`${yyyy}년 ${mm}월 ${dd}일 ${hh}시 ${ms}분`);
+    }
+
+    getCoronaState = () => {
         var proxy = "https://cors-anywhere.herokuapp.com";
         var url = "https://api.dropper.tech/covid19/status/korea?locale=busan";
 
@@ -35,38 +47,34 @@ export default class CoronaState extends Component {
             <View style={style.container}>
                 {
                     this.state.status ?
-                        <View>
-                            <Text>{new Date(this.state.status.announced_timestamp * 1000).toDateString()}</Text>
-                            <Text>{this.state.status.certified}</Text>
-                            <Text>{this.state.status.increased}</Text>
-                            <Text>{this.state.status.deisolated}</Text>
-                            <Text>{this.state.status.dead}</Text>
+                    <View style={{flex:1, width:'100%', maxWidth: 600}}>
+                        <View style={{flex:2, justifyContent: "center", alignItems: "center"}}>
+                            <Text style={{fontSize:20, color:"#fff", fontFamily:"NotoSansM"}}>기준시간</Text>
+                            <Text style={{fontSize:30, color:"#fff", fontFamily:'NotoSansB', color:"#fedd04"}}>{this.getTimestemp()}</Text>
                         </View>
+                        <View style={{flex:5}}>
+                            <View style={style.column}>
+                                <View style={{flex:1}}><Text style={style.label}>누적</Text></View>
+                                <View style={{flex:1, justifyContent: "center", alignItems: "center"}}><Text style={style.state}>{this.state.status.certified}</Text></View>
+                            </View>
+                            <View style={style.column}>
+                                <View style={{flex:1}}><Text style={style.label}>금일 추가</Text></View>
+                                <View style={{flex:1, justifyContent: "center", alignItems: "center"}}><Text style={style.state}>{this.state.status.increased}</Text></View>
+                            </View>
+                            <View style={style.column}>
+                                <View style={{flex:1}}><Text style={style.label}>완치</Text></View>
+                                <View style={{flex:1, justifyContent: "center", alignItems: "center"}}><Text style={style.state}>{this.state.status.deisolated}</Text></View>
+                            </View>
+                            <View style={style.column}>
+                                <View style={{flex:1}}><Text style={style.label}>사망</Text></View>
+                                <View style={{flex:1, justifyContent: "center", alignItems: "center"}}><Text style={style.state}>{this.state.status.dead}</Text></View>
+                            </View>
+                        </View>
+                        <View style={{flex:1}}></View>
+                    </View>
                     : null
                 }
-                <View style={{flex:1, width:'100%', maxWidth: 600}}>
-                    <View style={{flex:1, justifyContent: "center", alignItems: "center"}}>
-                        <Text style={{fontSize:30, fontWeight:"bold", color:"#fff"}}>2019/03/24</Text>
-                    </View>
-                    <View style={{flex:4}}>
-                        <View style={style.column}>
-                            <Text style={style.label}>누적</Text>
-                            <Text style={style.state}>100</Text>
-                        </View>
-                        <View style={style.column}>
-                            <Text style={style.label}>금일 추가</Text>
-                            <Text style={style.state}>100</Text>
-                        </View>
-                        <View style={style.column}>
-                            <Text style={style.label}>완치</Text>
-                            <Text style={style.state}>100</Text>
-                        </View>
-                        <View style={style.column}>
-                            <Text style={style.label}>사망</Text>
-                            <Text style={style.state}>100</Text>
-                        </View>
-                    </View>
-                </View>
+                
             </View>
         );
     }
@@ -84,16 +92,20 @@ const style = StyleSheet.create({
         justifyContent: 'space-around'
     },
     label: {
-        flex: 1,
         fontSize: 20,
         textAlign: "center",
-        color:"#fff"
+        color:"#fff",
+        fontFamily: 'NotoSansM'
     },
     state: {
-        flex: 1,
         fontSize:30,
-        fontWeight:"bold",
         textAlign:"center",
-        color:"#fedd04"
+        color:"#fedd04",
+        fontFamily: 'NotoSansB',
+        backgroundColor:"#1e1e1e",
+        borderRadius: 10,
+        minWidth:50,
+        padding:10,
+        lineHeight:30
     }
 });
