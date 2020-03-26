@@ -1,30 +1,19 @@
 import React, { Component } from 'react';
-import { View, Text, StyleSheet } from 'react-native';
+import { View, Text, StyleSheet, TouchableOpacity } from 'react-native';
 
 export default class MaskStore extends Component {
     
     state = {
-        store: false
+        stores: false
     }
 
-    componentDidMount(){
-        // this.fetchCoronaState()
-        // .then(stores => {
-        //     console.log(stores)
-        //     for(let i=0; i < stores.storeInfos.length; i++){
-        //         this.setState({
-        //             ...this.state,
-        //             i
-        //         })
-        //     }
-        // })
+    fetchCoronaState = (address) => {
 
-    }
-
-    fetchCoronaState = () => {
-
-        return fetch("https://8oi9s0nnth.apigw.ntruss.com/corona19-masks/v1/stores/json?page=1&perPage=100")
+        fetch(`https://8oi9s0nnth.apigw.ntruss.com/corona19-masks/v1/storesByAddr/json?address=부산광역시 ${address}`)
         .then(res=> res.json())
+        .then(res => this.setState({
+            stores : res
+        }))
         .catch(error => console.log('error', error));
 
     }
@@ -32,11 +21,18 @@ export default class MaskStore extends Component {
     render(){
         return (
             <View style={style.container}>
-                {
-                    this.state.store ?
-                        <Text>{JSON.stringify(this.state)}</Text>
-                    : null
-                }
+                <View style={{flex:1, alignItems: "center", justifyContent: "center"}}>
+                    {
+                        this.state.stores ?
+                            <Text style={{fontSize:30, fontFamily:"NotoSansB", color:"#fedd04"}}>{this.state.stores.address}</Text>
+                        :  <Text style={{fontSize:30, fontFamily:"NotoSansB", color:"#fedd04"}}>마스크 판매 현황</Text>
+                    }
+                    <View>
+                        <TouchableOpacity onPress={() => this.fetchCoronaState('강서구')}>
+                            <Text>강서구</Text>
+                        </TouchableOpacity>
+                    </View>
+                </View>
             </View>
         );
     }

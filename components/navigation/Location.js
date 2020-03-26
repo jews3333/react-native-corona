@@ -46,12 +46,28 @@ export default class Location extends Component {
     render(){
         return (
             <View style={style.container}>
-                <Text style={{flex:1}}>확진자 이동경로</Text>
+                <View style={{flex:1, alignItems: "center", justifyContent: "center"}}>
+                    <Text style={{fontSize:30, fontFamily:"NotoSansB", color:"#fedd04"}}>확진자 이동경로</Text>
+                </View>
                 {
                     this.state.locations ?
-                    <ScrollView style={{flex:6}}>
+                    <ScrollView style={{flex:5}}>
                         {
-                            
+                            Object.keys(this.state.locations).map((list, index) => {
+                                return <View key={index} style={{margin:10, borderRadius:10, backgroundColor:"#1e1e1e", padding:10}}>
+                                    <Text style={{color:"#fff", fontSize:"20", fontFamily:"NotoSansB", color:"#fedd04", paddingBottom:10, borderBottomWidth: 1, borderBottomColor: "#999"}}>{list}번 확진자 동선</Text>
+                                    <View>
+                                    {
+                                        Object.values(this.state.locations[list]).map((item, index) => {
+                                            return <View key={index} style={{flexDirection:"row", margin: 10}}>
+                                                <Text style={{color:"#fff", marginRight: 20, fontFamily:"NotoSansB"}}>{item.month}/{item.date}</Text>
+                                                <Text style={{color:"#fff", fontFamily:"NotoSansM"}}>{item.content}</Text>
+                                            </View>
+                                        })
+                                    }
+                                    </View>
+                                </View>
+                            })
                         }
                     </ScrollView>
                     : null
